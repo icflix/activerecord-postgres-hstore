@@ -30,7 +30,11 @@ module ActiveRecord
       end
 
       def from_hstore hstore
-        PgHstore.load hstore, false
+        if hstore.class == String
+          PgHstore.load hstore, false
+        else
+          hstore
+        end
       end
     end
   end
